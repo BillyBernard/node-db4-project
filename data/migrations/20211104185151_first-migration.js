@@ -26,6 +26,22 @@ exports.up = function (knex) {
       .createTable('step_ingredients', (tbl) => {
           tbl.increments('quantity_id')
           tbl.decimal('quantity')
+          tbl
+            .integer('step_id')
+            .unsigned()
+            .notNullable()
+            .references('step_id')
+            .inTable('steps')
+            .onDelete('restrict')
+            .onUpdate('restrict')
+          tbl
+            .integer('ingredient_id')
+            .unsigned()
+            .notNullable()
+            .references('ingredients_id')
+            .inTable('ingredients')
+            .onDelete('restrict')
+            .onUpdate('restrict')
       })
   };
   
